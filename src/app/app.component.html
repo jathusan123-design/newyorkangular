@@ -1,0 +1,15 @@
+<app-preloader *ngIf="isLoading"></app-preloader>
+
+<ng-container *ngIf="!isLoading">
+  <!-- Picker page: no header/footer -->
+  <router-outlet *ngIf="isPickerPage"></router-outlet>
+
+  <!-- Content pages: with header/footer -->
+  <ng-container *ngIf="!isPickerPage">
+    <app-header></app-header>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+    <app-footer></app-footer>
+  </ng-container>
+</ng-container>

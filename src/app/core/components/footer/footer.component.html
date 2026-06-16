@@ -1,0 +1,72 @@
+<footer class="site-footer">
+  <div class="footer-top">
+    <div class="container">
+      <div class="row g-5">
+
+        <!-- Brand column -->
+        <div class="col-lg-4 col-md-6">
+          <img src="assets/images/main_logo.png"
+               alt="New York Guest House and Restaurant"
+               class="footer-logo mb-3">
+          <p class="footer-about">
+            Experience comfort and warm hospitality at New York Guest House and Restaurant.
+            Proudly serving guests across two locations in Colombo 05 and Colombo 06, Sri Lanka.
+          </p>
+          <div class="social-links">
+            <a *ngFor="let s of socialLinks" [href]="s.url" target="_blank" rel="noopener">
+              <i [class]="s.icon"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="col-lg-2 col-md-6">
+          <h5 class="footer-heading">Quick Links</h5>
+          <ul class="footer-links">
+            <li *ngFor="let link of quickLinks">
+              <a [routerLink]="link.path">{{ link.label }}</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Services -->
+        <div class="col-lg-3 col-md-6">
+          <h5 class="footer-heading">Facilities</h5>
+          <ul class="footer-links">
+            <li *ngFor="let s of services"><span>{{ s }}</span></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="col-lg-3 col-md-6">
+          <h5 class="footer-heading">Contact Info</h5>
+          <ul class="contact-list" *ngIf="location">
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              <span>{{ location.address }}</span>
+            </li>
+            <li>
+              <i class="fas fa-phone"></i>
+              <span>{{ location.phone }}<span *ngIf="location.phone2"><br>{{ location.phone2 }}</span></span>
+            </li>
+            <li>
+              <i class="fas fa-envelope"></i>
+              <span>{{ location.email }}</span>
+            </li>
+            <li>
+              <i class="fas fa-clock"></i>
+              <span>{{ location.hours }}</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      <p>&copy;{{ currentYear }}, Design and Developed By IM Solutions Pvt. Ltd, All Right Reserved.</p>
+    </div>
+  </div>
+</footer>

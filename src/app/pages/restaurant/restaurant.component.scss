@@ -1,0 +1,299 @@
+/* Intro images */
+.restaurant-img-wrap {
+  position: relative;
+  padding-bottom: 60px;
+  padding-right: 60px;
+
+  .img-main {
+    width: 100%;
+    height: 460px;
+    object-fit: cover;
+  }
+
+  .img-float {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 230px;
+    height: 230px;
+    border: 6px solid #fff;
+
+    img { width: 100%; height: 100%; object-fit: cover; }
+  }
+}
+
+/* Opening hours quick ref */
+.hours-quick { border-top: 1px solid #e8e0d0; }
+
+.hours-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 0;
+  border-bottom: 1px solid #e8e0d0;
+
+  .meal {
+    font-weight: 600;
+    color: #1a1a1a;
+    font-size: 14px;
+    min-width: 90px;
+  }
+
+  .dots {
+    flex: 1;
+    border-bottom: 1px dashed #ccc;
+  }
+
+  .time {
+    font-size: 14px;
+    color: #c9a96e;
+  }
+}
+
+/* Venue cards */
+.venue-card {
+  border: 1px solid #e8e0d0;
+  overflow: hidden;
+  background: #fff;
+  height: 100%;
+  transition: box-shadow 0.3s;
+
+  &:hover { box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
+
+  .venue-img {
+    height: 220px;
+    overflow: hidden;
+
+    img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+  }
+
+  &:hover .venue-img img { transform: scale(1.05); }
+
+  .venue-body { padding: 22px 24px; }
+
+  .venue-hours {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #c9a96e;
+    margin-bottom: 8px;
+  }
+
+  h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+  }
+
+  p { font-size: 14px; color: #777; line-height: 1.7; margin: 0; }
+}
+
+/* Filter tabs */
+.menu-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.tab-btn {
+  padding: 10px 28px;
+  border: 1px solid #e8e0d0;
+  background: #fff;
+  color: #555;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover,
+  &.active {
+    background: #c9a96e;
+    border-color: #c9a96e;
+    color: #fff;
+  }
+}
+
+/* Menu card */
+.menu-card {
+  border: 1px solid #e8e0d0;
+  overflow: hidden;
+  background: #fff;
+  transition: box-shadow 0.3s, transform 0.3s;
+
+  &:hover {
+    box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+    transform: translateY(-4px);
+
+    .menu-img img { transform: scale(1.05); }
+  }
+}
+
+.menu-img {
+  position: relative;
+  overflow: hidden;
+  height: 220px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+
+  .menu-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: #c9a96e;
+    color: #fff;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+  }
+
+  .menu-cat {
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    background: rgba(0,0,0,0.6);
+    color: rgba(255,255,255,0.85);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+  }
+}
+
+.menu-body { padding: 22px 24px; }
+
+.menu-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+
+  h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+  }
+
+  .menu-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #c9a96e;
+    white-space: nowrap;
+  }
+}
+
+.menu-body p {
+  font-size: 13px;
+  color: #777;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Menu list view */
+.list-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: #1a1a1a;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #c9a96e;
+  margin-bottom: 24px;
+}
+
+.menu-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px dashed #e0d8cc;
+
+  &:last-child { border-bottom: none; }
+
+  .list-info {
+    flex: 1;
+
+    h5 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 4px;
+    }
+
+    p { font-size: 13px; color: #888; margin: 0; line-height: 1.5; }
+  }
+
+  .list-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #c9a96e;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+}
+
+/* Reservation CTA */
+.reservation-cta {
+  background: #1a1a1a;
+  padding: 100px 0;
+
+  .subtitle-light {
+    display: block;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #c9a96e;
+    margin-bottom: 14px;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 48px);
+    color: #fff;
+    margin-bottom: 14px;
+  }
+
+  p { color: rgba(255,255,255,0.6); font-size: 15px; max-width: 480px; margin: 0 auto; }
+}
+
+.cta-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.cta-phone {
+  color: rgba(255,255,255,0.7);
+  font-size: 15px;
+  text-decoration: none;
+  transition: color 0.2s;
+
+  i { color: #c9a96e; margin-right: 6px; }
+
+  &:hover { color: #c9a96e; }
+}
+
+@media (max-width: 991px) {
+  .restaurant-img-wrap {
+    padding-bottom: 40px;
+    padding-right: 40px;
+    margin-bottom: 40px;
+  }
+}

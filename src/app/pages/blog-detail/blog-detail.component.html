@@ -1,0 +1,136 @@
+<app-page-banner
+  [title]="post?.title || 'Blog'"
+  subtitle="Our Blog"
+  backgroundImage="assets/images/banner-blog.jpg">
+</app-page-banner>
+
+<section *ngIf="post">
+  <div class="container">
+    <div class="row g-5">
+
+      <!-- ===== ARTICLE ===== -->
+      <div class="col-lg-8">
+        <article class="blog-article">
+
+          <!-- Hero image -->
+          <div class="article-hero">
+            <img [src]="post.image" [alt]="post.title">
+          </div>
+
+          <!-- Meta -->
+          <div class="article-meta">
+            <span class="cat-badge">{{ post.category }}</span>
+            <span><i class="fas fa-user"></i> {{ post.author }}</span>
+            <span><i class="fas fa-calendar-alt"></i> {{ formatDate(post.date) }}</span>
+            <span><i class="fas fa-clock"></i> {{ post.readTime }} min read</span>
+          </div>
+
+          <h1 class="article-title">{{ post.title }}</h1>
+          <p class="article-lead">{{ post.excerpt }}</p>
+
+          <!-- Body -->
+          <div class="article-body" [innerHTML]="fullContent"></div>
+
+          <!-- Tags -->
+          <div class="article-tags mt-4">
+            <strong>Tags:</strong>
+            <span class="tag" *ngFor="let tag of post.tags">{{ tag }}</span>
+          </div>
+
+          <!-- Author box -->
+          <div class="author-box">
+            <div class="author-img">
+              <img [src]="post.authorAvatar" [alt]="post.author">
+            </div>
+            <div class="author-info">
+              <h5>{{ post.author }}</h5>
+              <span>Contributing Writer</span>
+              <p>A passionate hospitality writer and traveller sharing insights on luxury stays, fine dining and the art of great hotel experiences.</p>
+            </div>
+          </div>
+
+          <!-- Comment form -->
+          <div class="comment-section mt-5">
+            <h3 class="section-sub-heading">Leave a Comment</h3>
+
+            <div class="comment-success" *ngIf="commentSubmitted">
+              <i class="fas fa-check-circle"></i>
+              <p>Your comment has been submitted. Thank you!</p>
+            </div>
+
+            <form [formGroup]="commentForm" (ngSubmit)="submitComment()" *ngIf="!commentSubmitted" novalidate>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Your Name *</label>
+                    <input type="text" formControlName="name" placeholder="Full name">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Email Address *</label>
+                    <input type="email" formControlName="email" placeholder="your@email.com">
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>Comment *</label>
+                    <textarea formControlName="comment" rows="5" placeholder="Share your thoughts..."></textarea>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn-primary-custom">Post Comment</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+        </article>
+      </div>
+
+      <!-- ===== SIDEBAR ===== -->
+      <div class="col-lg-4">
+        <aside class="blog-sidebar">
+
+          <!-- Recent posts -->
+          <div class="sidebar-widget">
+            <h5 class="widget-title">Recent Posts</h5>
+            <div class="recent-post" *ngFor="let p of relatedPosts">
+              <div class="recent-img">
+                <img [src]="p.image" [alt]="p.title">
+              </div>
+              <div class="recent-info">
+                <a [routerLink]="['/blog', p.id]">{{ p.title }}</a>
+                <span>{{ formatDate(p.date) }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Related -->
+          <div class="sidebar-widget">
+            <h5 class="widget-title">Related Articles</h5>
+            <div class="related-item" *ngFor="let p of relatedPosts">
+              <div class="rel-img">
+                <img [src]="p.image" [alt]="p.title">
+              </div>
+              <div class="rel-info">
+                <span class="rel-cat">{{ p.category }}</span>
+                <a [routerLink]="['/blog', p.id]">{{ p.title }}</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tags -->
+          <div class="sidebar-widget">
+            <h5 class="widget-title">Tags</h5>
+            <div class="tags-cloud">
+              <span class="tag" *ngFor="let tag of post.tags">{{ tag }}</span>
+            </div>
+          </div>
+
+        </aside>
+      </div>
+
+    </div>
+  </div>
+</section>

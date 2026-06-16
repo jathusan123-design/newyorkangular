@@ -1,0 +1,38 @@
+<div class="picker-page">
+
+  <!-- Logo banner -->
+  <div class="picker-header">
+    <img src="assets/images/main_logo.png" alt="New York Guest House and Restaurant" class="picker-logo">
+    <h1>New York Guest House and Restaurant</h1>
+    <p>Please select a location to continue</p>
+  </div>
+
+  <!-- Location cards -->
+  <div class="picker-cards">
+    <div class="picker-card" *ngFor="let loc of locations" (click)="select(loc)">
+      <div class="card-image">
+        <img [src]="loc.cardImage" [alt]="loc.name">
+        <div class="card-overlay"></div>
+      </div>
+      <div class="card-content">
+        <span class="area-badge">{{ loc.area }}</span>
+        <h2>{{ loc.name }}</h2>
+        <p class="suburb">{{ loc.suburb }}, Sri Lanka</p>
+        <p class="address">{{ loc.address }}</p>
+        <div class="phone">
+          <i class="fas fa-phone"></i> {{ loc.phone }}
+        </div>
+        <div class="select-btn">
+          Select This Location <i class="fas fa-arrow-right"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer strip -->
+  <div class="picker-footer">
+    <span><i class="fas fa-phone"></i> 077 255 5551 &nbsp;|&nbsp; 077 257 1975</span>
+    <span><i class="fas fa-envelope"></i> newyorkguesthouseandrestaurant&#64;gmail.com</span>
+  </div>
+
+</div>

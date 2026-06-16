@@ -1,0 +1,16 @@
+<section class="page-banner"
+         [style.background-image]="'url(' + backgroundImage + ')'">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="banner-content">
+      <span class="subtitle" *ngIf="subtitle">{{ subtitle }}</span>
+      <h1>{{ title }}</h1>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+          <li class="breadcrumb-item active">{{ title }}</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</section>

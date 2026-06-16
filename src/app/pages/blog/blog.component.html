@@ -1,0 +1,130 @@
+<app-page-banner
+  title="Our Blog"
+  subtitle="Latest News"
+  backgroundImage="assets/images/banner-blog.jpg">
+</app-page-banner>
+
+<section>
+  <div class="container">
+    <div class="row g-5">
+
+      <!-- ===== POSTS COLUMN ===== -->
+      <div class="col-lg-8">
+
+        <!-- Mobile search -->
+        <div class="search-bar d-lg-none mb-4">
+          <input
+            type="text"
+            [(ngModel)]="searchQuery"
+            placeholder="Search articles..."
+            class="search-input">
+          <i class="fas fa-search"></i>
+        </div>
+
+        <!-- Category filter (mobile-friendly horizontal scroll) -->
+        <div class="cat-pills mb-4">
+          <button
+            *ngFor="let cat of categories"
+            class="cat-pill"
+            [class.active]="cat === activeCategory"
+            (click)="setCategory(cat)">
+            {{ cat }}
+          </button>
+        </div>
+
+        <!-- Post grid -->
+        <div class="row g-4" *ngIf="filteredPosts.length > 0">
+          <div class="col-md-6" *ngFor="let post of filteredPosts">
+            <article class="post-card">
+              <div class="post-img">
+                <a [routerLink]="['/blog', post.id]">
+                  <img [src]="post.image" [alt]="post.title" loading="lazy">
+                </a>
+                <span class="post-cat">{{ post.category }}</span>
+              </div>
+              <div class="post-body">
+                <div class="post-meta">
+                  <span><i class="fas fa-user"></i> {{ post.author }}</span>
+                  <span><i class="fas fa-calendar-alt"></i> {{ formatDate(post.date) }}</span>
+                  <span><i class="fas fa-clock"></i> {{ post.readTime }} min read</span>
+                </div>
+                <h3>
+                  <a [routerLink]="['/blog', post.id]">{{ post.title }}</a>
+                </h3>
+                <p>{{ post.excerpt }}</p>
+                <a [routerLink]="['/blog', post.id]" class="read-more">
+                  Read More <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Empty state -->
+        <div class="empty-state text-center py-5" *ngIf="filteredPosts.length === 0">
+          <i class="fas fa-search"></i>
+          <p>No articles found. Try a different category or search term.</p>
+        </div>
+
+      </div>
+
+      <!-- ===== SIDEBAR ===== -->
+      <div class="col-lg-4">
+        <aside class="blog-sidebar">
+
+          <!-- Search -->
+          <div class="sidebar-widget d-none d-lg-block">
+            <h5 class="widget-title">Search</h5>
+            <div class="search-bar">
+              <input
+                type="text"
+                [(ngModel)]="searchQuery"
+                placeholder="Search articles..."
+                class="search-input">
+              <i class="fas fa-search"></i>
+            </div>
+          </div>
+
+          <!-- Categories -->
+          <div class="sidebar-widget">
+            <h5 class="widget-title">Categories</h5>
+            <ul class="cat-list">
+              <li *ngFor="let cat of categories.slice(1)">
+                <a (click)="setCategory(cat)" [class.active]="cat === activeCategory">
+                  <span>{{ cat }}</span>
+                  <span class="count">
+                    {{ allPosts | catCount:cat }}
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Recent posts -->
+          <div class="sidebar-widget">
+            <h5 class="widget-title">Recent Posts</h5>
+            <div class="recent-post" *ngFor="let post of recentPosts">
+              <div class="recent-img">
+                <img [src]="post.image" [alt]="post.title">
+              </div>
+              <div class="recent-info">
+                <a [routerLink]="['/blog', post.id]">{{ post.title }}</a>
+                <span>{{ formatDate(post.date) }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tags -->
+          <div class="sidebar-widget">
+            <h5 class="widget-title">Popular Tags</h5>
+            <div class="tags-cloud">
+              <span class="tag" *ngFor="let tag of tags">{{ tag }}</span>
+            </div>
+          </div>
+
+        </aside>
+      </div>
+
+    </div>
+  </div>
+</section>

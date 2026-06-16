@@ -1,0 +1,179 @@
+.picker-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f8f5f0;
+}
+
+/* Header */
+.picker-header {
+  text-align: center;
+  padding: 56px 24px 40px;
+  background: #1a1a1a;
+
+  .picker-logo {
+    height: 120px;
+    width: 120px;
+    display: block;
+    margin: 0 auto 20px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: #fff;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 3vw, 34px);
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+
+  p {
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #c9a96e;
+  }
+}
+
+/* Cards */
+.picker-cards {
+  display: flex;
+  flex: 1;
+  gap: 0;
+
+  @media (max-width: 767px) { flex-direction: column; }
+}
+
+.picker-card {
+  flex: 1;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  min-height: 75vh;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 767px) { min-height: 50vh; }
+
+  &:hover {
+    .card-image img { transform: scale(1.06); }
+    .card-overlay { background: rgba(0,0,0,0.55); }
+    .select-btn { background: #c9a96e; color: #fff; padding-left: 20px; }
+    .area-badge { background: #c9a96e; }
+  }
+
+  /* Vertical divider between cards */
+  & + & { border-left: 3px solid #c9a96e; }
+}
+
+.card-image {
+  position: absolute;
+  inset: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+  }
+
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    transition: background 0.4s;
+  }
+}
+
+.card-content {
+  position: relative;
+  z-index: 1;
+  padding: 40px;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  @media (max-width: 991px) { padding: 28px; }
+}
+
+.area-badge {
+  display: inline-block;
+  background: rgba(201,169,110,0.85);
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  width: fit-content;
+  transition: background 0.3s;
+}
+
+.card-content h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 3vw, 34px);
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.suburb {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.address {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  margin: 0;
+}
+
+.phone {
+  font-size: 14px;
+  color: rgba(255,255,255,0.85);
+  i { color: #c9a96e; margin-right: 6px; }
+}
+
+.select-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  padding: 12px 20px;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  width: fit-content;
+  transition: all 0.3s;
+
+  i { font-size: 11px; transition: transform 0.3s; }
+  &:hover i { transform: translateX(4px); }
+}
+
+/* Footer strip */
+.picker-footer {
+  background: #111;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+
+  span {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+
+    i { color: #c9a96e; margin-right: 6px; }
+  }
+}

@@ -1,0 +1,109 @@
+<header class="site-header" [class.scrolled]="isScrolled">
+  <div class="container">
+    <nav class="navbar">
+
+      <!-- Logo -->
+      <!-- transparent state  → royella_ts_logo / royella_retina_logo = logo-1-2.png  -->
+      <!-- scrolled/dark state → royella_logo = logo-default.png                       -->
+      <a class="navbar-brand" routerLink="/" (click)="closeAll()">
+        <img src="assets/images/main_logo.png"
+             alt="New York Guest House and Restaurant"
+             class="logo-img">
+      </a>
+
+      <!-- ===== Desktop Nav ===== -->
+      <ul class="nav-links d-none d-lg-flex">
+        <li *ngFor="let link of navLinks"
+            [class.has-dropdown]="link.children">
+
+          <!-- Plain link — no dropdown -->
+          <a *ngIf="!link.children"
+             [routerLink]="link.path"
+             routerLinkActive="active"
+             [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+             (click)="closeAll()">
+            {{ link.label }}
+          </a>
+
+          <!-- Dropdown trigger — toggles submenu, does NOT navigate -->
+          <button *ngIf="link.children"
+                  class="dropdown-trigger"
+                  [class.open]="openDropdown === link.label"
+                  (click)="toggleDropdown(link.label, $event)">
+            {{ link.label }}
+            <i class="fas fa-chevron-down"
+               [class.rotated]="openDropdown === link.label"></i>
+          </button>
+
+          <!-- Dropdown panel -->
+          <ul class="dropdown-panel" [class.open]="openDropdown === link.label">
+            <li *ngFor="let child of link.children">
+              <a (click)="navigateChild(child, $event)">{{ child.label }}</a>
+            </li>
+          </ul>
+
+        </li>
+      </ul>
+
+      <!-- Location badge + Change -->
+      <div class="location-badge d-none d-lg-flex" *ngIf="selectedLocation">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>{{ selectedLocation.area }}</span>
+        <button class="change-btn" (click)="changeLocation()" title="Change location">
+          Change
+        </button>
+      </div>
+
+      <!-- Booking CTA -->
+      <a routerLink="/contact" class="btn-book d-none d-lg-inline-block"
+         (click)="closeAll()">Booking Online</a>
+
+      <!-- Hamburger -->
+      <button class="hamburger d-lg-none"
+              (click)="toggleMobileMenu()"
+              [class.open]="isMobileMenuOpen"
+              aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+
+    </nav>
+  </div>
+
+  <!-- ===== Mobile Menu ===== -->
+  <div class="mobile-menu" [class.open]="isMobileMenuOpen">
+    <ul>
+      <li *ngFor="let link of navLinks">
+
+        <!-- Plain link -->
+        <a *ngIf="!link.children"
+           [routerLink]="link.path"
+           routerLinkActive="active"
+           [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+           (click)="closeAll()">
+          {{ link.label }}
+        </a>
+
+        <!-- Accordion -->
+        <div *ngIf="link.children" class="mobile-accordion">
+          <button class="mobile-trigger"
+                  (click)="toggleDropdown(link.label, $event)">
+            {{ link.label }}
+            <i class="fas fa-chevron-down"
+               [class.rotated]="openDropdown === link.label"></i>
+          </button>
+          <ul class="mobile-sub" [class.open]="openDropdown === link.label">
+            <li *ngFor="let child of link.children">
+              <a (click)="navigateChild(child, $event)">{{ child.label }}</a>
+            </li>
+          </ul>
+        </div>
+
+      </li>
+      <li>
+        <a routerLink="/contact" class="btn-book-mobile"
+           (click)="closeAll()">Booking Online</a>
+      </li>
+    </ul>
+  </div>
+
+</header>

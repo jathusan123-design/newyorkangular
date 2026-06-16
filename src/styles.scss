@@ -1,0 +1,195 @@
+/* =====================================================
+   New York Portal — Global Styles
+   ===================================================== */
+
+:root {
+  --primary:      #c9a96e;
+  --primary-dark: #a07840;
+  --dark:         #1a1a1a;
+  --darker:       #111111;
+  --text:         #555555;
+  --light-bg:     #f8f5f0;
+  --border:       #e8e0d0;
+  --white:        #ffffff;
+  --font-heading: 'Cormorant Garamond', serif;
+  --font-body:    'Jost', sans-serif;
+}
+
+/* Base */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--text);
+  background-color: var(--white);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--dark);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  &:hover { color: var(--primary-dark); }
+}
+
+img { max-width: 100%; height: auto; }
+
+/* Section spacing */
+section { padding: 90px 0; }
+
+.section-bg { background-color: var(--light-bg); }
+
+/* Section title */
+.section-title {
+  margin-bottom: 50px;
+
+  .subtitle {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--primary);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  h2 {
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  p {
+    font-size: 16px;
+    color: var(--text);
+    max-width: 600px;
+  }
+
+  &.text-center p { margin: 0 auto; }
+
+  .divider {
+    width: 60px;
+    height: 2px;
+    background: var(--primary);
+    margin: 20px 0;
+    &.mx-auto { margin-left: auto; margin-right: auto; }
+  }
+}
+
+/* Buttons */
+.btn-primary-custom {
+  display: inline-block;
+  padding: 14px 36px;
+  background: var(--primary);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: 2px solid var(--primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: transparent;
+    color: var(--primary);
+  }
+}
+
+.btn-outline-custom {
+  display: inline-block;
+  padding: 14px 36px;
+  background: transparent;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: 2px solid var(--white);
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: var(--white);
+    color: var(--dark);
+  }
+}
+
+/* Card */
+.card-custom {
+  background: var(--white);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+  }
+
+  .card-img {
+    overflow: hidden;
+    height: 240px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+  }
+
+  &:hover .card-img img { transform: scale(1.05); }
+
+  .card-body { padding: 28px; }
+
+  .card-title {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 10px;
+  }
+}
+
+/* Overlay */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* Preloader */
+#preloader {
+  position: fixed;
+  inset: 0;
+  background: var(--darker);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.5s ease;
+
+  &.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  section { padding: 60px 0; }
+  .section-title h2 { font-size: 28px; }
+}

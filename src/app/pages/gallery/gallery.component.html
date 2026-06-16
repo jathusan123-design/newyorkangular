@@ -1,0 +1,64 @@
+<app-page-banner
+  title="Photo Gallery"
+  subtitle="Visual Tour"
+  backgroundImage="assets/images/banner-gallery.jpg">
+</app-page-banner>
+
+<!-- ===== GALLERY ===== -->
+<section>
+  <div class="container">
+
+    <!-- Filter -->
+    <div class="gallery-filter text-center mb-5">
+      <button
+        *ngFor="let cat of categories"
+        class="filter-btn"
+        [class.active]="cat === activeCategory"
+        (click)="setCategory(cat)">
+        {{ cat }}
+      </button>
+    </div>
+
+    <!-- Grid -->
+    <div class="gallery-grid">
+      <div
+        class="gallery-item"
+        *ngFor="let item of filteredItems; let i = index"
+        (click)="openLightbox(i)">
+        <img [src]="item.image" [alt]="item.title" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="overlay-content">
+            <i class="fas fa-expand-alt"></i>
+            <span>{{ item.title }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="text-center text-muted py-5" *ngIf="filteredItems.length === 0">
+      No images in this category.
+    </p>
+
+  </div>
+</section>
+
+<!-- ===== LIGHTBOX ===== -->
+<div class="lightbox" *ngIf="lightboxOpen" (click)="closeLightbox()">
+  <div class="lightbox-inner" (click)="$event.stopPropagation()">
+    <button class="lb-close" (click)="closeLightbox()">
+      <i class="fas fa-times"></i>
+    </button>
+    <button class="lb-prev" (click)="prevImage()">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <img [src]="filteredItems[lightboxIndex].image"
+         [alt]="filteredItems[lightboxIndex].title">
+    <div class="lb-caption">
+      <span>{{ filteredItems[lightboxIndex].title }}</span>
+      <small>{{ lightboxIndex + 1 }} / {{ filteredItems.length }}</small>
+    </div>
+    <button class="lb-next" (click)="nextImage()">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+</div>

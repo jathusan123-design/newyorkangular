@@ -1,0 +1,150 @@
+<app-page-banner
+  title="Restaurant & Dining"
+  subtitle="Luxury Dining Experience"
+  backgroundImage="assets/images/banner-restaurant.jpg">
+</app-page-banner>
+
+<!-- ===== INTRO ===== -->
+<section>
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <div class="restaurant-img-wrap">
+          <img src="assets/images/restaurant-main.jpg" alt="Restaurant interior" class="img-main">
+          <div class="img-float">
+            <img src="assets/images/restaurant-accent.jpg" alt="Fine dining">
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="section-title">
+          <span class="subtitle">Luxury Restaurant</span>
+          <h2>Enjoy Taste Foods in Our Hotel's Restaurant</h2>
+          <div class="divider"></div>
+        </div>
+        <p>We serve the best fresh and tasty foods for our customers. Our café and restaurant centre provides a luxury dining experience — from freshly brewed coffees and light bites to full restaurant meals in a warm, welcoming setting.</p>
+        <p class="mt-3">Relax like you and enjoy our spa, bar and café. Our culinary team is dedicated to quality, freshness and genuine Sri Lankan hospitality in every dish served.</p>
+
+        <div class="hours-quick mt-4">
+          <div class="hours-row" *ngFor="let h of hours">
+            <span class="meal">{{ h.meal }}</span>
+            <span class="dots"></span>
+            <span class="time">{{ h.time }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DINING VENUES ===== -->
+<section class="section-bg">
+  <div class="container">
+    <div class="section-title text-center">
+      <span class="subtitle">Extra Facilities</span>
+      <h2>Extra Facilities for Luxurious Life</h2>
+      <div class="divider mx-auto"></div>
+      <p>Experience ultimate comfort and convenience with our thoughtfully designed facilities. Each space is crafted to make your stay relaxing, productive, and memorable.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6" *ngFor="let venue of venues">
+        <div class="venue-card">
+          <div class="venue-img">
+            <img [src]="venue.image" [alt]="venue.name">
+          </div>
+          <div class="venue-body">
+            <span class="venue-hours">{{ venue.hours }}</span>
+            <h4>{{ venue.name }}</h4>
+            <p>{{ venue.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MENU ===== -->
+<section id="menu">
+  <div class="container">
+    <div class="section-title text-center">
+      <span class="subtitle">Our Menu</span>
+      <h2>OUR MENU</h2>
+      <div class="divider mx-auto"></div>
+      <p>Browse our seasonal menu, crafted fresh every day by our award-winning culinary team.</p>
+    </div>
+
+    <!-- Filter tabs -->
+    <div class="menu-tabs text-center mb-5">
+      <button
+        *ngFor="let cat of categories"
+        class="tab-btn"
+        [class.active]="cat === activeCategory"
+        (click)="setCategory(cat)">
+        {{ cat }}
+      </button>
+    </div>
+
+    <!-- Menu grid -->
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6" *ngFor="let item of filteredItems">
+        <div class="menu-card">
+          <div class="menu-img">
+            <img [src]="item.image" [alt]="item.name">
+            <span class="menu-badge" *ngIf="item.badge">{{ item.badge }}</span>
+            <span class="menu-cat">{{ activeCategory === 'All' ? '' : activeCategory }}</span>
+          </div>
+          <div class="menu-body">
+            <div class="menu-title-row">
+              <h4>{{ item.name }}</h4>
+              <span class="menu-price">${{ item.price }}</span>
+            </div>
+            <p>{{ item.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty state -->
+    <p class="text-center text-muted py-4" *ngIf="filteredItems.length === 0">
+      No items found in this category.
+    </p>
+  </div>
+</section>
+
+<!-- ===== MENU LIST BY CATEGORY ===== -->
+<section>
+  <div class="container">
+    <div class="section-title text-center">
+      <span class="subtitle">Quick Reference</span>
+      <h2>Our Full Menu</h2>
+      <div class="divider mx-auto"></div>
+    </div>
+    <div class="row g-5">
+      <div class="col-lg-6" *ngFor="let cat of location.menuCategories">
+        <h4 class="list-heading">{{ cat.name }}</h4>
+        <div class="menu-list-item" *ngFor="let item of cat.items">
+          <div class="list-info">
+            <h5>{{ item.name }}</h5>
+            <p>{{ item.description }}</p>
+          </div>
+          <span class="list-price">{{ item.currency }}{{ item.price }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RESERVATION CTA ===== -->
+<section class="reservation-cta">
+  <div class="container text-center">
+    <span class="subtitle-light">Reserve Your Table</span>
+    <h2>Dining at Its Finest</h2>
+    <p>For reservations and special dining arrangements, please contact our restaurant team.</p>
+    <div class="cta-actions mt-4">
+      <a routerLink="/contact" class="btn-outline-custom">Make a Reservation</a>
+      <a [href]="'tel:' + location.phone" class="cta-phone">
+        <i class="fas fa-phone"></i> {{ location.phone }}
+      </a>
+    </div>
+  </div>
+</section>

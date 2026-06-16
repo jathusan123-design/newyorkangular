@@ -1,0 +1,241 @@
+<!-- ===== HERO ===== -->
+<section class="loc-hero" [style.background-image]="'url(' + location.heroImage + ')'">
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-content">
+      <span class="hero-sub">Welcome to</span>
+      <h1>{{ location.name }}</h1>
+      <div class="hero-badge">
+        <i class="fas fa-map-marker-alt"></i>
+        {{ location.area }} — {{ location.suburb }}, Sri Lanka
+      </div>
+      <div class="hero-phone">
+        <a [href]="'tel:' + location.phone">
+          <i class="fas fa-phone"></i> {{ location.phone }}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STICKY SECTION NAV ===== -->
+<nav class="section-nav">
+  <div class="container">
+    <ul>
+      <li *ngFor="let tab of tabs">
+        <button
+          [class.active]="activeTab === tab.id"
+          (click)="setTab(tab.id)">
+          <i [class]="tab.icon"></i>
+          <span>{{ tab.label }}</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== OVERVIEW ===== -->
+<section id="overview" class="loc-section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <img [src]="location.image" [alt]="location.name" class="overview-img">
+      </div>
+      <div class="col-lg-6">
+        <div class="section-title">
+          <span class="subtitle">{{ location.area }}</span>
+          <h2>{{ location.name }}</h2>
+          <div class="divider"></div>
+        </div>
+        <p>{{ location.description }}</p>
+        <p class="mt-3">2 Hotels located in Wellawatte and Kirulapone, helping provide customers with a hearty warm welcome in a friendly, homely environment.</p>
+
+        <div class="row g-3 mt-3">
+          <div class="col-6" *ngFor="let s of stats">
+            <div class="stat-box">
+              <span class="val">{{ s.value }}</span>
+              <span class="lbl">{{ s.label }}</span>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-primary-custom mt-4" (click)="setTab('rooms')">
+          View Rooms
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ROOMS ===== -->
+<section id="rooms" class="loc-section section-bg">
+  <div class="container">
+    <div class="section-title text-center">
+      <span class="subtitle">Accommodations</span>
+      <h2>Featured Rooms &amp; Apartments</h2>
+      <div class="divider mx-auto"></div>
+      <p>All rooms include Free Wi-Fi, Air Conditioning and 24/7 Front Desk service.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6" *ngFor="let room of location.rooms">
+        <div class="room-card">
+          <div class="room-img">
+            <img [src]="room.image" [alt]="room.name">
+            <span class="room-discount">{{ room.discount }}</span>
+          </div>
+          <div class="room-body">
+            <h4>{{ room.name }}</h4>
+            <ul class="room-features">
+              <li *ngFor="let f of room.features">
+                <i class="fas fa-check-circle"></i> {{ f }}
+              </li>
+            </ul>
+            <div class="room-footer">
+              <div class="room-price">
+                <span class="currency">Rs.</span>
+                <span class="amount">{{ room.price | number }}</span>
+                <span class="per">/ {{ room.unit }}</span>
+              </div>
+              <button class="btn-book-sm" (click)="setTab('contact')">Book</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RESTAURANT ===== -->
+<section id="restaurant" class="loc-section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <div class="section-title">
+          <span class="subtitle">Dining</span>
+          <h2>The Restaurant Center</h2>
+          <div class="divider"></div>
+        </div>
+        <p>Our in-house café and restaurant serves fresh, quality food throughout the day. From morning coffees and light bites to full restaurant meals — all prepared with care and genuine Sri Lankan warmth.</p>
+        <p class="mt-3">Operating hours: <strong>Lunch 11:00 AM – 2:30 PM</strong></p>
+        <p>We also offer beverages and desserts all day through our café counter.</p>
+
+        <div class="restaurant-items mt-4">
+          <div class="r-item" *ngFor="let item of [
+            {name:'Double Espresso',   price:'$1.50'},
+            {name:'Hot Chocolate',     price:'$3.50'},
+            {name:'Coffee with Milk',  price:'$3.50'},
+            {name:'Chocolate Cake',    price:'$5.50'},
+            {name:'Classic Cheesecake',price:'$4.50'},
+            {name:'Vegan Cheesecake',  price:'$7.50'}
+          ]">
+            <span class="r-name">{{ item.name }}</span>
+            <span class="r-dots"></span>
+            <span class="r-price">{{ item.price }}</span>
+          </div>
+        </div>
+
+        <a routerLink="/restaurant" class="btn-primary-custom mt-4 d-inline-block">Full Menu</a>
+      </div>
+      <div class="col-lg-6">
+        <img src="assets/images/restaurant-main.jpg" alt="Restaurant" class="restaurant-img">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FACILITIES ===== -->
+<section id="facilities" class="loc-section section-bg">
+  <div class="container">
+    <div class="section-title text-center">
+      <span class="subtitle">Hotel Facilities</span>
+      <h2>Extra Facilities for Luxurious Life</h2>
+      <div class="divider mx-auto"></div>
+    </div>
+
+    <!-- 4 facility cards -->
+    <div class="row g-4 mb-5">
+      <div class="col-lg-3 col-md-6" *ngFor="let f of location.facilities">
+        <div class="facility-card text-center">
+          <div class="fac-icon">
+            <i [class]="f.icon"></i>
+          </div>
+          <h5>{{ f.name }}</h5>
+          <p>{{ f.desc }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amenities list -->
+    <div class="amenities-grid">
+      <div class="amenity" *ngFor="let a of [
+        {icon:'fas fa-city',          label:'City View Rooms'},
+        {icon:'fas fa-snowflake',     label:'A/C Rooms'},
+        {icon:'fas fa-dumbbell',      label:'Gym / Fitness Area'},
+        {icon:'fas fa-parking',       label:'Private Parking Available'},
+        {icon:'fas fa-swimming-pool', label:'Swimming Pool'},
+        {icon:'fas fa-wifi',          label:'Wi-Fi Internet'}
+      ]">
+        <i [class]="a.icon"></i>
+        <span>{{ a.label }}</span>
+      </div>
+    </div>
+
+    <!-- Manager quote -->
+    <div class="manager-card mt-5">
+      <div class="manager-img">
+        <img [src]="location.manager.image" [alt]="location.manager.name">
+      </div>
+      <div class="manager-info">
+        <p class="manager-quote">"{{ location.manager.quote }}"</p>
+        <strong>{{ location.manager.name }}</strong>
+        <span>{{ location.manager.role }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact" class="loc-section">
+  <div class="container">
+    <div class="section-title text-center">
+      <span class="subtitle">Get In Touch</span>
+      <h2>Contact — {{ location.area }}</h2>
+      <div class="divider mx-auto"></div>
+    </div>
+    <div class="row g-4 justify-content-center">
+      <div class="col-lg-3 col-md-6">
+        <div class="contact-info-card text-center">
+          <i class="fas fa-map-marker-alt"></i>
+          <h5>Address</h5>
+          <p>{{ location.address }}</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="contact-info-card text-center">
+          <i class="fas fa-phone-alt"></i>
+          <h5>Phone</h5>
+          <p><a [href]="'tel:' + location.phone">{{ location.phone }}</a></p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="contact-info-card text-center">
+          <i class="fas fa-envelope"></i>
+          <h5>Email</h5>
+          <p><a [href]="'mailto:' + location.email">{{ location.email }}</a></p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="contact-info-card text-center">
+          <i class="fas fa-clock"></i>
+          <h5>Hours</h5>
+          <p>{{ location.hours }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-5">
+      <p class="mb-3">Looking to book a room or table at this location?</p>
+      <a routerLink="/contact" class="btn-primary-custom">Make a Reservation</a>
+    </div>
+  </div>
+</section>

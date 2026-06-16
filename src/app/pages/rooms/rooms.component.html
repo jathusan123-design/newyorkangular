@@ -1,0 +1,87 @@
+<app-page-banner
+  title="Rooms & Suites"
+  subtitle="Accommodations"
+  backgroundImage="assets/images/banner-rooms.jpg">
+</app-page-banner>
+
+<section *ngIf="location">
+  <div class="container">
+
+    <!-- Location tag -->
+    <div class="location-tag mb-4">
+      <i class="fas fa-map-marker-alt"></i>
+      Showing rooms for: <strong>{{ location.area }} — {{ location.suburb }}</strong>
+    </div>
+
+    <!-- Filter -->
+    <div class="filter-bar text-center mb-5">
+      <button *ngFor="let cat of categories"
+              class="filter-btn"
+              [class.active]="cat === activeCategory"
+              (click)="setCategory(cat)">
+        {{ cat }}
+      </button>
+    </div>
+
+    <div class="section-title text-center mb-4">
+      <h2>Featured Rooms &amp; Apartments</h2>
+      <div class="divider mx-auto"></div>
+    </div>
+
+    <!-- Rooms grid -->
+    <div class="row g-4">
+      <div class="col-lg-6" *ngFor="let room of filteredRooms">
+        <div class="room-card">
+          <div class="room-img">
+            <img [src]="room.image" [alt]="room.name">
+            <span class="room-badge">{{ room.discount }}</span>
+          </div>
+          <div class="room-body">
+            <h3>{{ room.name }}</h3>
+            <ul class="amenities-list">
+              <li *ngFor="let a of room.features">
+                <i class="fas fa-check-circle"></i> {{ a }}
+              </li>
+            </ul>
+            <div class="room-footer">
+              <div class="price-block">
+                <span class="discount-tag">{{ room.discount }}</span>
+                <span class="amount">Rs.{{ room.price | number }}</span>
+                <span class="per">/ {{ room.unit }}</span>
+              </div>
+              <a [routerLink]="['/rooms', room.id]" class="btn-primary-custom btn-sm">Book Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Facilities -->
+<section class="section-bg">
+  <div class="container">
+    <div class="section-title text-center">
+      <span class="subtitle">Hotel Facilities</span>
+      <h2>Extra Facilities for Luxurious Life</h2>
+      <div class="divider mx-auto"></div>
+      <p>Experience ultimate comfort and convenience with our thoughtfully designed room facilities.</p>
+    </div>
+    <div class="row g-4 text-center">
+      <div class="col-lg-2 col-md-4 col-4" *ngFor="let item of [
+        {icon:'fas fa-utensils',        label:'Café & Restaurant'},
+        {icon:'fas fa-swimming-pool',   label:'Indoor Swimming Pool'},
+        {icon:'fas fa-wifi',            label:'Free Wi-Fi'},
+        {icon:'fas fa-snowflake',       label:'Air Conditioning'},
+        {icon:'fas fa-parking',         label:'Private Parking'},
+        {icon:'fas fa-dumbbell',        label:'Gym / Fitness Area'}
+      ]">
+        <div class="amenity-icon">
+          <i [class]="item.icon"></i>
+          <span>{{ item.label }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
