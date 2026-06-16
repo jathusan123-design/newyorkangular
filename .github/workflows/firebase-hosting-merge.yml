@@ -15,9 +15,8 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-      - run: npm install --prefer-online
-        env:
-          npm_config_registry: https://registry.npmjs.org
+      - run: echo "registry=https://registry.npmjs.org" > .npmrc
+      - run: npm install
       - run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
